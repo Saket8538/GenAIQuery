@@ -1,5 +1,5 @@
 
-# GenQuery 2.0: Simplify Your SQL Journey
+# GenQuery 2.0: Simplifying SQL for Everyone with AI-Powered Natural Language Queries and Seamless Data Visualization.
 
 Welcome to GenQuery! This project aims to simplify data access and manipulation in SQL databases through natural language commands, educational examples, and powerful AI integration.
 
@@ -44,10 +44,10 @@ Welcome to GenQuery! This project aims to simplify data access and manipulation 
 
 1. **Clone the Repository:**
     ```bash
-    git clone https://github.com/aniketandhale08/GenQuery-2.0
+    git clone https://github.com/aniketandhale08/GenQuery_2
     ```
     ```bash
-    cd GenQuery-2.0
+    cd GenQuery_2
     ```
 
 2. **Install the required libraries:**
