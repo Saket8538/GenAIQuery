@@ -22,7 +22,7 @@ Welcome to GenQuery! This project aims to simplify data access and manipulation 
 
 ## Built With
 
-![Tools](https://github.com/user-attachments/assets/ea5ecce3-b19f-4231-89c8-d867dc0a9601)
+![Tools](https://github.com/aniketandhale08/GenQuery/blob/main/Media/Tools.png)
 
 - **Languages:** Python
 - **Frameworks:** Streamlit
@@ -32,7 +32,7 @@ Welcome to GenQuery! This project aims to simplify data access and manipulation 
 - **Data Visualization:** Plotly Express
 - **AI & NLP:** Google’s Generative AI tools
 
-![Data Analysis & Visualization](https://github.com/user-attachments/assets/9a7a7086-54b9-4785-ba0e-63c0150c6a70)
+![Data Analysis & Visualization](https://github.com/aniketandhale08/GenQuery/blob/main/Media/Data%20Analysis%20%26%20Visualization.png)
 
 ## Project Architecture
 
