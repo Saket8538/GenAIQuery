@@ -309,7 +309,7 @@ def main():
 
         # Add instructions with download link
         # st.header("Instructions")
-        st.write("Download the database, [link](https://storage.cloud.google.com/tidb_hack/Music.sql?authuser=2) or view ER-diagram, [link](https://storage.cloud.google.com/tidb_hack/ER-diagram.jpg?authuser=2)")
+        st.write("Download the database, [link](https://storage.googleapis.com/tidb_hack/Music.sql) or view ER-diagram, [link](https://storage.googleapis.com/tidb_hack/ER-diagram.jpg)")
         
         # Display sample questions
         st.write("Sample Questions,")
