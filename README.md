@@ -3,7 +3,7 @@
 
 Welcome to GenQuery! This project aims to simplify data access and manipulation in SQL databases through natural language commands, educational examples, and powerful AI integration.
 
-![gif](https://github.com/user-attachments/assets/733619ed-c962-4d83-a697-a5053fc9a406)
+![gif](https://github.com/aniketandhale08/GenQuery/blob/main/Media/gif.gif)
 
 ## Features
 
