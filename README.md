@@ -1,7 +1,7 @@
 
-# GenQuery: Simplifying SQL for Everyone with AI-Powered Natural Language Queries and Seamless Data Visualization.
+# GenAIQuery: Simplifying SQL for Everyone with AI-Powered Natural Language Queries and Seamless Data Visualization.
 
-Welcome to GenQuery! This project aims to simplify data access and manipulation in SQL databases through natural language commands, educational examples, and powerful AI integration.
+Welcome to GenAIQuery! This project aims to simplify data access and manipulation in SQL databases through natural language commands, educational examples, and powerful AI integration.
 
 ![gif](https://github.com/aniketandhale08/GenQuery/blob/main/Media/gif.gif)
 

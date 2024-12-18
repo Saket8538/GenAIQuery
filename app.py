@@ -102,7 +102,7 @@ def generate_chart(df, chart_type):
     st.plotly_chart(fig, use_container_width=True)
 
 def generate_sql_query(model, input_prompt):
-    template = """
+    template = r"""
         Create a SQL query snippet using the below text:
 
         ```
@@ -116,7 +116,7 @@ def generate_sql_query(model, input_prompt):
     return sql_query
 
 def generate_expected_output(model, sql_query):
-    expected_output = """
+    expected_output = r"""
         What would be the expected response of this SQL query snippet:
 
         ```
@@ -129,7 +129,7 @@ def generate_expected_output(model, sql_query):
     return response.text
 
 def generate_explanation(model, sql_query):
-    explanation = """
+    explanation = r"""
         Explain this SQL query:
 
         ```
@@ -142,7 +142,7 @@ def generate_explanation(model, sql_query):
     return response.text
 
 def sql_formatter(model, sql_code):
-    template = """
+    template = r"""
         Format this SQL code block:
 
         ```
@@ -156,7 +156,7 @@ def sql_formatter(model, sql_code):
     return formatted_sql
 
 def query_explainer(model, sql_syntax):
-    explanation = """
+    explanation = r"""
         Explain each part of this SQL query:
 
         ```
@@ -168,12 +168,27 @@ def query_explainer(model, sql_syntax):
     response = model.generate_content(explanation_formatted)
     return response.text
 
+def gemini_ai_chat(model):
+    st.title("AI Chat")
+
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = []
+
+    input_prompt = st.text_area("Enter your question:")
+    if st.button("Send"):
+        response = model.generate_content(input_prompt)
+        st.session_state.chat_history.append({"user": input_prompt, "gemini": response.text})
+
+    for chat in st.session_state.chat_history:
+        st.write(f"**You:** {chat['user']}")
+        st.write(f"**Gemini:** {chat['gemini']}")
+
 def main():
     model = configure()
     st.set_page_config(page_title="GenQuery", page_icon="robot:")
 
-    st.sidebar.title('Navigation')
-    pages = st.sidebar.radio("Go to", ['About', 'SQL Query Generator', 'SQL Formatter', 'Query Explainer', 'Data Analysis & Visualization'])
+    st.sidebar.title('Navigation Panel')
+    pages = st.sidebar.radio("Explore here", ['About', 'SQL Query Generator', 'SQL Formatter', 'Query Explainer', 'Data Analysis & Visualization','AI Chat'])
 
     if pages == 'About':
         st.markdown(
@@ -221,7 +236,13 @@ def main():
             📊 Makes data analysis accessible and insightful without needing technical expertise.
             """
         )
-
+        st.subheader("AI Chat")
+        st.write(
+            """
+            Chat with latest powered Large Language Model for all type of programming or any general chat questions.
+            🤖Helps in stucking out to algorithm or programming logic or write better codes.
+            """
+        )
     elif pages == 'SQL Query Generator':
         st.markdown(
             """
@@ -345,6 +366,7 @@ def main():
                     st.write("No results found for the given query.")
             else:
                 st.write("No valid SQL query could be extracted from the response.")
-
+    elif pages == "AI Chat":
+        gemini_ai_chat(model) 
 if __name__ == "__main__":
     main()
