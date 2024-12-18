@@ -194,7 +194,7 @@ def main():
         st.markdown(
             """
             <div style="text-align:center;">
-                <h1>GenQuery 2.0🤖</h1>
+                <h1>GenAIQuery🤖</h1>
                 <h3>Your Personal SQL Query Assistant</h3>
                 <p> Welcome to GenQuery! Our project is your personal SQL query assistant powered by Google's Generative AI tools. 
                 With GenQuery, you can effortlessly generate SQL queries and receive detailed explanations, and also format your for readability and consistency. Let's simplifying your data retrieval process!</p>           
