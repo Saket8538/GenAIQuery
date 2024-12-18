@@ -1,9 +1,8 @@
 
-# GenAIQuery: Simplifying SQL for Everyone with AI-Powered Natural Language Queries and Seamless Data Visualization.
+# GenAIQuery: Simplifying SQL for Everyone with AI-Powered Natural Language Queries and Seamless Data Visualization and Integrated AI chat for general queries.
 
 Welcome to GenAIQuery! This project aims to simplify data access and manipulation in SQL databases through natural language commands, educational examples, and powerful AI integration.
 
-![gif](https://github.com/aniketandhale08/GenQuery/blob/main/Media/gif.gif)
 
 ## Features
 
@@ -20,9 +19,11 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 ### 4. Data Analysis & Visualization
 - **Visual Insights:** Generate charts and visualizations directly from your queries to better understand your data.
 
+### 5. AI Chat
+- **Code Generation & Chat:** Chat and generate code with LLM powered Geemini 1.5 pro.
+
 ## Built With
 
-![Tools](https://github.com/aniketandhale08/GenQuery/blob/main/Media/Tools.png)
 
 - **Languages:** Python
 - **Frameworks:** Streamlit
@@ -32,7 +33,6 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 - **Data Visualization:** Plotly Express
 - **AI & NLP:** Google’s Generative AI tools
 
-![Data Analysis & Visualization](https://github.com/aniketandhale08/GenQuery/blob/main/Media/Data%20Analysis%20%26%20Visualization.png)
 
 ## Project Architecture
 
@@ -44,10 +44,10 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 
 1. **Clone the Repository:**
     ```bash
-    git clone https://github.com/aniketandhale08/GenQuery
+    
     ```
     ```bash
-    cd GenQuery
+    cd GenAIQuery
     ```
 
 2. **Install the required libraries:**
@@ -65,7 +65,7 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 
 5. **Run the Application:**
     ```bash
-    streamlit run app.py
+    python -m streamlit run app.py
     ```
     - This will launch a web app in your default browser, usually at http://localhost:8501.
 
