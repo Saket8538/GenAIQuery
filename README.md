@@ -19,6 +19,9 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 ### 4. Data Analysis & Visualization
 - **Visual Insights:** Generate charts and visualizations directly from your queries to better understand your data.
 
+### 5. AI Chat
+- **Code Generation & Chat:** Chat and generate code with LLM powered Geemini 1.5 pro.
+
 ## Built With
 
 
