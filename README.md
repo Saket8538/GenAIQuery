@@ -48,7 +48,7 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 
 1. **Clone the Repository:**
     ```bash
-    
+    git clone https://github.com/Saket8538/GenAIQuery.git
     ```
     ```bash
     cd GenAIQuery
