@@ -22,7 +22,6 @@ Video link-https://www.loom.com/share/ae75b063988a4089b519769638a3d2bf?sid=418c3
 ### 5. AI Chat
 - **Code Generation & Chat:** Chat and generate code with LLM powered Geemini 1.5 pro.
 
-![app.gif](https://github.com/Saket8538/GenAIQuery/blob/main/Media/gif.gif)
 
 ## Built With
 ![tools](https://github.com/Saket8538/GenAIQuery/blob/main/Media/Tools.png)
