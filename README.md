@@ -22,8 +22,10 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 ### 5. AI Chat
 - **Code Generation & Chat:** Chat and generate code with LLM powered Geemini 1.5 pro.
 
-## Built With
+![app.gif](https://github.com/Saket8538/GenAIQuery/blob/main/Media/gif.gif)
 
+## Built With
+![tools](https://github.com/Saket8538/GenAIQuery/blob/main/Media/Tools.png)
 
 - **Languages:** Python
 - **Frameworks:** Streamlit
@@ -33,6 +35,8 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 - **Data Visualization:** Plotly Express
 - **AI & NLP:** Google’s Generative AI tools
 
+![dbschema](https://github.com/Saket8538/GenAIQuery/blob/main/Media/ER-diagram.png)
+![visualisation](https://github.com/Saket8538/GenAIQuery/blob/main/Media/Data%20Analysis%20%26%20Visualization.png)
 
 ## Project Architecture
 
