@@ -5,7 +5,7 @@ Welcome to GenAIQuery! This project aims to simplify data access and manipulatio
 
 
 ## Features
-
+Video link-https://www.loom.com/share/ae75b063988a4089b519769638a3d2bf?sid=418c3ecc-74f8-426b-8bfb-7ec72a83f8ed
 ### 1. Natural Language SQL Query Generation
 - **Query Simplification:** Generate SQL queries by simply typing your request in plain language.
 - **Output Understanding:** Receive explanations for each query, breaking down the syntax and logic used.
