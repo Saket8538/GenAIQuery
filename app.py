@@ -171,17 +171,16 @@ def query_explainer(model, sql_syntax):
 def gemini_ai_chat(model):
     st.title("AI Chat")
 
-    if "chat_history" not in st.session_state:
-        st.session_state.chat_history = []
+    if "chat_history" in st.session_state:
+ st.session_state.chat_history []
 
-    input_prompt = st.text_area("Enter your question:")
-    if st.button("Send"):
+    input_prompt = st_area("Enter your question:")
+    if st.button(""):
         response = model.generate_content(input_prompt)
-        st.session_state.chat_history.append({"user": input_prompt, "gemini": response.text})
+        st.session_state.chat_history.append": input_prompt, "gemini":.text})
 
-    for chat in st.session_state.chat_history:
-        st.write(f"**You:** {chat['user']}")
-        st.write(f"**Gemini:** {chat['gemini']}")
+    for chat in st.session.chat_history        st.write(f"**You:** {['user']}")
+       .write(f"**Gemini:**chat['gemini']}")
 
 def main():
     model = configure()
