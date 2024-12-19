@@ -171,20 +171,27 @@ def query_explainer(model, sql_syntax):
 def gemini_ai_chat(model):
     st.title("AI Chat")
 
-    if "chat_history" in st.session_state:
- st.session_state.chat_history []
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = []
 
-    input_prompt = st_area("Enter your question:")
-    if st.button(""):
+    with st.form(key='chat_form', clear_on_submit=True):
+        input_prompt = st.text_area("Enter your question:")
+        submit_button = st.form_submit_button(label='Send')
+
+    if submit_button:
         response = model.generate_content(input_prompt)
-        st.session_state.chat_history.append": input_prompt, "gemini":.text})
+        st.session_state.chat_history.clear()  # Clear previous chat history
+        st.session_state.chat_history.append({"user": input_prompt, "gemini": response.text})
 
-    for chat in st.session.chat_history        st.write(f"**You:** {['user']}")
-       .write(f"**Gemini:**chat['gemini']}")
+    for chat in st.session_state.chat_history:
+        st.write(f"**You:** {chat['user']}")
+        st.markdown(f"**Gemini:**\n```{chat['gemini']}```")
+
+
 
 def main():
     model = configure()
-    st.set_page_config(page_title="GenQuery", page_icon="robot:")
+    st.set_page_config(page_title="GenAIQuery", page_icon="robot:")
 
     st.sidebar.title('Navigation Panel')
     pages = st.sidebar.radio("Explore here", ['About', 'SQL Query Generator', 'SQL Formatter', 'Query Explainer', 'Data Analysis & Visualization','AI Chat'])
@@ -193,7 +200,7 @@ def main():
         st.markdown(
             """
             <div style="text-align:center;">
-                <h1>GenAIQuery🤖</h1>
+                <h1>GenQuery 2.0🤖</h1>
                 <h3>Your Personal SQL Query Assistant</h3>
                 <p> Welcome to GenQuery! Our project is your personal SQL query assistant powered by Google's Generative AI tools. 
                 With GenQuery, you can effortlessly generate SQL queries and receive detailed explanations, and also format your for readability and consistency. Let's simplifying your data retrieval process!</p>           
