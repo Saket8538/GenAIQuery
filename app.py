@@ -181,7 +181,7 @@ def gemini_ai_chat(model):
     if submit_button:
         response = model.generate_content(input_prompt)
         st.session_state.chat_history.clear()  # Clear previous chat history
-        st.session_state.chat_history.append({"user": input_prompt, "AI Chat": response.text})
+        st.session_state.chat_history.append({"user": input_prompt, "Gemini": response.text})
 
     for chat in st.session_state.chat_history:
         st.write(f"**You:** {chat['user']}")
