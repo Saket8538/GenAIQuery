@@ -181,7 +181,7 @@ def gemini_ai_chat(model):
     if submit_button:
         response = model.generate_content(input_prompt)
         st.session_state.chat_history.clear()  # Clear previous chat history
-        st.session_state.chat_history.append({"user": input_prompt, "gemini": response.text})
+        st.session_state.chat_history.append({"user": input_prompt, "AI Chat": response.text})
 
     for chat in st.session_state.chat_history:
         st.write(f"**You:** {chat['user']}")
@@ -200,7 +200,7 @@ def main():
         st.markdown(
             """
             <div style="text-align:center;">
-                <h1>GenQuery 2.0🤖</h1>
+                <h1>GenAIQuery 🤖</h1>
                 <h3>Your Personal SQL Query Assistant</h3>
                 <p> Welcome to GenQuery! Our project is your personal SQL query assistant powered by Google's Generative AI tools. 
                 With GenQuery, you can effortlessly generate SQL queries and receive detailed explanations, and also format your for readability and consistency. Let's simplifying your data retrieval process!</p>           
