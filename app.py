@@ -185,7 +185,7 @@ def gemini_ai_chat(model):
 
     for chat in st.session_state.chat_history:
         st.write(f"**You:** {chat['user']}")
-        st.markdown(f"**Gemini:**\n```{chat['gemini']}```")
+        st.markdown(f"**AI Chat:**\n```{chat['gemini']}```")
 
 
 
