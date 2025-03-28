@@ -20,7 +20,7 @@ Video link-https://www.loom.com/share/ae75b063988a4089b519769638a3d2bf?sid=418c3
 - **Visual Insights:** Generate charts and visualizations directly from your queries to better understand your data.
 
 ### 5. AI Chat
-- **Code Generation & Chat:** Chat and generate code with LLM powered Geemini 1.5 pro.
+- **Code Generation & Chat:** Chat and generate code with LLM powere Azure OpenAI.
 
 
 ## Built With
@@ -40,7 +40,7 @@ Video link-https://www.loom.com/share/ae75b063988a4089b519769638a3d2bf?sid=418c3
 ## Project Architecture
 
 - **Frontend:** Built with Streamlit for a user-friendly interface.
-- **Backend:** Powered by Python and integrated with the Gemini 1.5 Pro API for AI capabilities.
+- **Backend:** Powered by Python and integrated with the Azure OpenAI API for AI capabilities.
 - **Database:** Managed with SQLite, ensuring lightweight and efficient data management.
 
 ## Setup Instructions
