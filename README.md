@@ -28,11 +28,11 @@ Video link-https://www.loom.com/share/ae75b063988a4089b519769638a3d2bf?sid=418c3
 ![python,sqllite](https://github.com/Saket8538/GenAIQuery/blob/main/Media/sqllite%2Cpython.jpeg)
 - **Languages:** Python
 - **Frameworks:** Streamlit
-- **Cloud Services:** Google Cloud Platform (GCP)
+- **Cloud Services:** Microsoft Azure
 - **Databases:** SQLite
-- **APIs:** Gemini 1.5 Pro API
+- **APIs:** Azure OpenAI API
 - **Data Visualization:** Plotly Express
-- **AI & NLP:** Google’s Generative AI tools
+- **AI & NLP:** Azure Responsible AI
 
 ![dbschema](https://github.com/Saket8538/GenAIQuery/blob/main/Media/ER-diagram.png)
 ![visualisation](https://github.com/Saket8538/GenAIQuery/blob/main/Media/Data%20Analysis%20%26%20Visualization.png)
