@@ -63,7 +63,9 @@ Video link-https://www.loom.com/share/ae75b063988a4089b519769638a3d2bf?sid=418c3
 
 4. **Environment Variables:**
     ```bash
-    export GOOGLE_API_KEY=your_google_api_key
+    export AZURE_OPENAI_ENDPOINT=https://your-azure-openai-endpoint.openai.azure.com/
+    export AZURE_OPENAI_KEY=your_azure_openai_api_key
+    export AZURE_OPENAI_DEPLOYMENT_NAME=your_deployment_name
     ```
 
 5. **Run the Application:**
