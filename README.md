@@ -24,8 +24,8 @@ Video link-https://www.loom.com/share/ae75b063988a4089b519769638a3d2bf?sid=418c3
 
 
 ## Built With
-![tools]([https://github.com/Saket8538/GenAIQuery/blob/main/Media/Tools.png](https://github.com/Saket8538/GenAIQuery/blob/main/Media/sqllite%2Cpython.jpeg)
-(https://github.com/Saket8538/GenAIQuery/blob/main/Media/azureopenai.jpeg)
+![tools](https://github.com/Saket8538/GenAIQuery/blob/main/Media/azureopenai.jpeg)
+![python,sqllite](https://github.com/Saket8538/GenAIQuery/blob/main/Media/azureopenai.jpeg)
 - **Languages:** Python
 - **Frameworks:** Streamlit
 - **Cloud Services:** Google Cloud Platform (GCP)
