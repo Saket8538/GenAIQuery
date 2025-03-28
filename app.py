@@ -1,17 +1,24 @@
 import streamlit as st
-import google.generativeai as genai
 import sqlite3
 import pandas as pd
 import plotly.express as px
 from dotenv import load_dotenv
 import os
+import openai  # Add this import for Azure OpenAI API
 
 def configure():
     load_dotenv()
-    GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-    genai.configure(api_key=GOOGLE_API_KEY)
-    model = genai.GenerativeModel("gemini-pro")
-    return model
+    AZURE_OPENAI_ENDPOINT = os.getenv('AZURE_OPENAI_ENDPOINT')
+    AZURE_OPENAI_KEY = os.getenv('AZURE_OPENAI_KEY')
+    AZURE_OPENAI_DEPLOYMENT_NAME = os.getenv('AZURE_OPENAI_DEPLOYMENT_NAME')  # Deployment name for the model
+
+    # Configure OpenAI with Azure settings
+    openai.api_type = "azure"
+    openai.api_base = AZURE_OPENAI_ENDPOINT
+    openai.api_version = "2023-03-15-preview"
+    openai.api_key = AZURE_OPENAI_KEY
+
+    return AZURE_OPENAI_DEPLOYMENT_NAME
 
 # Database path (modify as needed)
 database_path = 'Music.db'
@@ -47,18 +54,26 @@ prompt = [
     """
 ]
 
-
-def get_gemini_response(question, prompt):
-    model = genai.GenerativeModel('gemini-pro')
-    response = model.generate_content([prompt[0], question])
-    return response.text
+def get_azure_openai_response(question, prompt, deployment_name):
+    try:
+        response = openai.ChatCompletion.create(
+            engine=deployment_name,  # Use deployment name instead of model name
+            messages=[
+                {"role": "system", "content": prompt[0]},
+                {"role": "user", "content": question}
+            ],
+            max_tokens=500  # Adjust max_tokens as needed
+        )
+        return response['choices'][0]['message']['content']
+    except Exception as e:
+        st.error(f"Error generating response: {e}")
+        return None
 
 def read_sql_query(sql, db):
     conn = sqlite3.connect(db)
     df = pd.read_sql_query(sql, conn)
     conn.close()
     return df
-
 
 def get_sql_query_from_response(response):
     try:
@@ -70,7 +85,6 @@ def get_sql_query_from_response(response):
         st.error("Could not extract SQL query from the response.")
         return None
 
-
 def determine_chart_type(df):
     if len(df.columns) == 2:
         if df.dtypes[1] in ['int64', 'float64'] and len(df) > 1:
@@ -80,7 +94,6 @@ def determine_chart_type(df):
     elif len(df.columns) >= 3 and df.dtypes[1] in ['int64', 'float64']:
         return 'line'
     return None
-
 
 def generate_chart(df, chart_type):
     if chart_type == 'bar':
@@ -101,74 +114,7 @@ def generate_chart(df, chart_type):
     fig.update_layout(plot_bgcolor="rgba(0,0,0,0)")
     st.plotly_chart(fig, use_container_width=True)
 
-def generate_sql_query(model, input_prompt):
-    template = r"""
-        Create a SQL query snippet using the below text:
-
-        ```
-        {text_input}
-        ```  
-        i just want a Sql query         
-    """
-    formatted_template = template.format(text_input=input_prompt)
-    response = model.generate_content(formatted_template)
-    sql_query = response.text.strip().lstrip("```sql").rstrip("```")
-    return sql_query
-
-def generate_expected_output(model, sql_query):
-    expected_output = r"""
-        What would be the expected response of this SQL query snippet:
-
-        ```
-        {sql_query}
-        ```  
-        Provide sample table response with no explanation        
-    """
-    expected_output_formatted = expected_output.format(sql_query=sql_query)
-    response = model.generate_content(expected_output_formatted)
-    return response.text
-
-def generate_explanation(model, sql_query):
-    explanation = r"""
-        Explain this SQL query:
-
-        ```
-        {sql_query}
-        ```  
-        Please provide the simplest explanation:       
-    """
-    explanation_formatted = explanation.format(sql_query=sql_query)
-    response = model.generate_content(explanation_formatted)
-    return response.text
-
-def sql_formatter(model, sql_code):
-    template = r"""
-        Format this SQL code block:
-
-        ```
-        {sql_code}
-        ```  
-        Format this SQL code        
-    """
-    formatted_template = template.format(sql_code=sql_code)
-    response = model.generate_content(formatted_template)
-    formatted_sql = response.text.strip().lstrip("```sql").rstrip("```")
-    return formatted_sql
-
-def query_explainer(model, sql_syntax):
-    explanation = r"""
-        Explain each part of this SQL query:
-
-        ```
-        {sql_syntax}
-        ```  
-        Please break down the query and explain each important concept or word:      
-    """
-    explanation_formatted = explanation.format(sql_syntax=sql_syntax)
-    response = model.generate_content(explanation_formatted)
-    return response.text
-
-def gemini_ai_chat(model):
+def gemini_ai_chat(deployment_name):
     st.title("AI Chat")
 
     if "chat_history" not in st.session_state:
@@ -179,22 +125,21 @@ def gemini_ai_chat(model):
         submit_button = st.form_submit_button(label='Send')
 
     if submit_button:
-        response = model.generate_content(input_prompt)
-        st.session_state.chat_history.clear()  # Clear previous chat history
-        st.session_state.chat_history.append({"user": input_prompt, "gemini": response.text})
+        response = get_azure_openai_response(input_prompt, prompt, deployment_name)
+        if response:
+            st.session_state.chat_history.clear()  # Clear previous chat history
+            st.session_state.chat_history.append({"user": input_prompt, "gemini": response})
 
     for chat in st.session_state.chat_history:
         st.write(f"**You:** {chat['user']}")
         st.markdown(f"**AI Chat:**\n```{chat['gemini']}```")
 
-
-
 def main():
-    model = configure()
+    deployment_name = configure()
     st.set_page_config(page_title="GenAIQuery", page_icon="robot:")
 
     st.sidebar.title('Navigation Panel')
-    pages = st.sidebar.radio("Explore here", ['About', 'SQL Query Generator', 'SQL Formatter', 'Query Explainer', 'Data Analysis & Visualization','AI Chat'])
+    pages = st.sidebar.radio("Explore here", ['About', 'SQL Query Generator', 'SQL Formatter', 'Query Explainer', 'Data Analysis & Visualization', 'AI Chat'])
 
     if pages == 'About':
         st.markdown(
@@ -202,7 +147,7 @@ def main():
             <div style="text-align:center;">
                 <h1>GenAIQuery 🤖</h1>
                 <h3>Your Personal SQL Query Assistant</h3>
-                <p> Welcome to GenQuery! Our project is your personal SQL query assistant powered by Google's Generative AI tools. 
+                <p> Welcome to GenQuery! Our project is your personal SQL query assistant powered by Azure OpenAI tools. 
                 With GenQuery, you can effortlessly generate SQL queries and receive detailed explanations, and also format your for readability and consistency. Let's simplifying your data retrieval process!</p>           
             </div>
             """,
@@ -265,26 +210,12 @@ def main():
 
         if submit:
             with st.spinner("Generating SQL Query.."):
-                sql_query = generate_sql_query(model, text_input)
-                eoutput = generate_expected_output(model, sql_query)
-                explanation = generate_explanation(model, sql_query)
-                with st.container():
+                sql_query = get_azure_openai_response(text_input, prompt, deployment_name)
+                if sql_query:
                     st.success("Your SQL query has been successfully generated. Feel free to copy and paste it into your database management system to retrieve the requested records.")
                     st.code(sql_query, language="sql")
-
-                    st.markdown(
-                        """
-                        <div style="background-color: #d4edda; padding: 10px; border-radius: 5px;">
-                            Expected output of this SQL Query.<br>
-                            If the structure of the query isn't displayed, please click again on the 'Generate SQL Query' button.
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-                    st.markdown(eoutput)
-
-                    st.success("Explanation of SQL Query")
-                    st.markdown(explanation)
+                else:
+                    st.error("Failed to generate SQL query.")
 
     elif pages == 'SQL Formatter':
         st.markdown(
@@ -302,8 +233,11 @@ def main():
 
         if format_button:
             if sql_input:
-                formatted_sql = sql_formatter(model, sql_input)
-                st.code(formatted_sql, language='sql')
+                formatted_sql = get_azure_openai_response(sql_input, ["Format this SQL code:"], deployment_name)
+                if formatted_sql:
+                    st.code(formatted_sql, language='sql')
+                else:
+                    st.error("Failed to format SQL code.")
 
     elif pages == 'Query Explainer':
         st.markdown(
@@ -320,8 +254,11 @@ def main():
 
         if explain_button:
             if sql_syntax:
-                explanation = query_explainer(model, sql_syntax)
-                st.markdown(explanation)
+                explanation = get_azure_openai_response(sql_syntax, ["Explain this SQL query:"], deployment_name)
+                if explanation:
+                    st.markdown(explanation)
+                else:
+                    st.error("Failed to explain SQL query.")
 
     elif pages == 'Data Analysis & Visualization':
         st.markdown(
@@ -335,7 +272,6 @@ def main():
         )
 
         # Add instructions with download link
-        # st.header("Instructions")
         st.write("Download the database, [link](https://storage.googleapis.com/tidb_hack/Music.sql) or view ER-diagram, [link](https://storage.googleapis.com/tidb_hack/ER-diagram.jpg)")
         
         # Display sample questions
@@ -350,7 +286,7 @@ def main():
         submit = st.button("Retrieve & Visualize Data")
 
         if submit and question:
-            response = get_gemini_response(question, prompt)
+            response = get_azure_openai_response(question, prompt, deployment_name)
             sql_query = get_sql_query_from_response(response)
 
             if sql_query:
@@ -373,6 +309,7 @@ def main():
             else:
                 st.write("No valid SQL query could be extracted from the response.")
     elif pages == "AI Chat":
-        gemini_ai_chat(model) 
+        gemini_ai_chat(deployment_name) 
+
 if __name__ == "__main__":
     main()
